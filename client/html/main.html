@@ -1,0 +1,119 @@
+<head>
+
+<title>Analogizer</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+	
+<!-- for Facebook:  -->
+<meta property="og:title" content="Analogizer"/>
+<meta property="og:image" content="http://heliosophiclabs.com/Analogizer/images/Milky_Way_Galaxy.jpg"/>
+<meta property="og:description" id="facebook-description" content="A Small Sense of Scale"/>
+<meta property="og:site_name" content="http://heliosophiclabs.com/Analogizer/"/>
+<meta property="og:url" content="http://heliosophiclabs.com/Analogizer/"/>
+<meta property="fb:app_id" content=""/>
+
+<!--  for Twitter: -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@analogizer" />
+<meta name="twitter:title" content="A Small Sense of Scale" />
+<meta name="twitter:description" content="Analogizer" />
+<meta name="twitter:image" content="http://heliosophiclabs.com/Analogizer/images/Milky_Way_Galaxy.jpg" />
+	
+</head>
+<body>
+
+	<table id="mainTable">
+		<tr>
+			<div id="header" class="top-level">
+				<div id="title">Analogizer
+				<span id="subtitle">A Small Sense of Scale</span>
+				</div>
+				<div id="intro">
+					Very large and very small numbers can be hard to grasp. Lucky for you, we are here to help you get a sense of
+					proportion without the need to resort to all that scientific notation. 
+				</div>
+				<div id="domains">
+					<div id="domains-label">Analogize by: </div>
+					<a href="#" id="domain-size" onClick="selectDomain(this);">Size</a> 
+					<a href="#" id="domain-distance" onClick="selectDomain(this);">Distance</a> 
+					<a href="#" id="domain-time" onClick="selectDomain(this);">Time</a> 
+				</div>
+			</div>
+		</tr>
+		<tr>
+			<td>
+				{{> main}}
+			</td>
+			<td>
+				<div id="detailsContainer">
+					<div id="left">
+						<div id="details" class="top-level">
+							<div id="details_title"></div>
+							<div id="details_measure"></div>
+							<div id="details_longDesc"></div>
+							<div id="details_source"></div>
+						</div>
+					</div>
+					<div id="details_image"></div>
+					<div id="byline">
+						Brought to you by <a href="mailto:mad7@runbox.com?subject=Analogizer feedback">Marc A. Donis</a>. Thanks for your feedback!
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</body>
+
+
+<template name="main">
+	<div id="main" class="top-level">
+		<span id="random-fact">
+			<a href="#" onClick="randomFact();">
+				<img src="images/random-icon.svg" alt="random fact" />
+			</a>
+		</span>
+		<span id="addtoany"> 
+			<span id="share-title">
+			Share this fact on 
+			</span>
+			<div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_target share-this">
+				<a class="a2a_button_twitter"></a>
+				<a class="a2a_button_facebook" onClick="facebookA2aClick();"></a>
+				<a class="a2a_button_google_plus"></a>
+				<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+			</div>
+<!-- 						<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script> -->
+		</span>
+		<br/>
+		<div id="fact-container">
+			<p>If</p>
+			{{> selections id="a1"}}
+			<p>were <span id="domain-descriptor"></span></p>
+			{{> selections id="b1"}}
+			<p>then</p>
+			{{> selections id="a2"}}
+			<p>would be</p>
+			<p>
+				<span id="multiplier"></span>&nbsp;times 
+			</p>
+			<p id="answer">
+				<a href="#" class="show-link" onClick="show();"><span id="b2"></span>.<img src="images/show_icon.png"/></a>
+			</p>
+		</div>
+		<div id="copy-fact-container" >
+			<button id="copy-fact" >Copy this fact to your clipboard</button>
+			<div id="copy-confirmation">Fact copied!</div>
+		</div>
+	</div>
+</template>
+
+<template name="selections">
+	<p id="{{id}}">
+		<select>
+			{{#each items}}
+				<option>{{this.description}}</option>
+			{{/each}}
+		</select>
+		<a href="#" class="show-link"><img src="images/show_icon.png"/></a>
+	</p>
+</template>
+
