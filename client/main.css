@@ -1,63 +1,50 @@
 body {
 	font-family: arial;
-	font-size: 12px;
 	background-color: #f0f0ff;
+	font-family: Lato;
 }
 
 #title {
+	text-align: center;
 	color: black;
 	font-weight: bold;
-	font-size: 2.0em;
-	margin-bottom: 10px;
+	font-size: 3em;
 }
 
 #subtitle {
 	color: black;
 	font-weight: bold;
-	font-size: 0.6em;
-	float: right;
-	margin-top: 6px;
-}
-
-#intro {
-	font-size: 1.4em;
-}
-
-#domains-label {
-	font-size: 1.4em;
-	font-weight: bold;
-	position: relative;
-	top: -4px;
+	font-size: 1.2em;
+	left: 20px;
+	position: absolute;
 }
 
 #domains {
 	text-align: center;
-	margin-bottom: 18px;
-	position: relative;
-	top: -4px;
-	border-width: 3px;
-	border-style: solid;
-	border-color: blue;
-	max-width: 240px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 20px;
+	height: 64px;
+	padding-top: 8px;
 }
 
-#domains a {
+#domains div {
+	width: 200px;
+	min-width: 200px;
+	display: inline;
 	text-decoration: none;
-	font-size: 1.2em;
+	font-size: 1.8em;
 	font-weight: bold;
 	background-color: white;
 	border-radius: 12px;
-	padding: 6px;
-	margin: 4px;
+	padding: 12px;
 	color: blue;
 	border-width: 3px;
 	border-style: solid;
+	margin-left: 14px;
+	margin-right: 14px;
+	position: relative;
+	top: 8px;
 }
 
-#domains a.selected {
+#domains div.selected {
 /* 	color: black; */
 /* 	border-color: black; */
 	background-color: yellow;
@@ -67,13 +54,11 @@ body {
 	background-color: #A1C7FF;
 	border: 2px solid;
 	border-radius: 4px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 #main select {
-	font-size: 18px;
-	background-color: #e0e0e0;
+	font-size: 36px;
+	background-color: #eee;
 }
 
 div {
@@ -90,11 +75,12 @@ div {
 	border: 12px double #f0f0ff;
 	color: white;
 	font-size: 1.8em;
+	margin-top: 22px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 20px;
 	text-align: center;
-	width: 600px;
+	width: 75%;
 }
 
 #left {
@@ -127,13 +113,9 @@ div {
 	line-height: 12px;
 }
 
-#mainTable td {
-	vertical-align: top;
-}
-
-#mainTable {
-	margin-left: auto;
-	margin-right: auto;
+#fact-container-first-line {
+	position: relative;
+	left: -42px;
 }
 
 #copy-fact-container {
@@ -206,5 +188,5 @@ div {
 }
 
 #random-fact img {
-	height: 44px;
+	height: 84px;
 }

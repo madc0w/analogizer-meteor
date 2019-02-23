@@ -2,6 +2,7 @@
 
 <title>Analogizer</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 	
 <!-- for Facebook:  -->
 <meta property="og:title" content="Analogizer"/>
@@ -20,90 +21,75 @@
 	
 </head>
 <body>
-
-	<table id="mainTable">
-		<tr>
-			<div id="header" class="top-level">
-				<div id="title">Analogizer
-				<span id="subtitle">A Small Sense of Scale</span>
-				</div>
-				<div id="intro">
-					Very large and very small numbers can be hard to grasp. Lucky for you, we are here to help you get a sense of
-					proportion without the need to resort to all that scientific notation. 
-				</div>
-				<div id="domains">
-					<div id="domains-label">Analogize by: </div>
-					<a href="#" id="domain-size" onClick="selectDomain(this);">Size</a> 
-					<a href="#" id="domain-distance" onClick="selectDomain(this);">Distance</a> 
-					<a href="#" id="domain-time" onClick="selectDomain(this);">Time</a> 
-				</div>
-			</div>
-		</tr>
-		<tr>
-			<td>
-				{{> main}}
-			</td>
-			<td>
-				<div id="detailsContainer">
-					<div id="left">
-						<div id="details" class="top-level">
-							<div id="details_title"></div>
-							<div id="details_measure"></div>
-							<div id="details_longDesc"></div>
-							<div id="details_source"></div>
-						</div>
-					</div>
-					<div id="details_image"></div>
-					<div id="byline">
-						Brought to you by <a href="mailto:mad7@runbox.com?subject=Analogizer feedback">Marc A. Donis</a>. Thanks for your feedback!
-					</div>
-				</div>
-			</td>
-		</tr>
-	</table>
+	{{> main}}
 </body>
 
 
 <template name="main">
-	<div id="main" class="top-level">
-		<span id="random-fact">
-			<a href="#" onClick="randomFact();">
-				<img src="images/random-icon.svg" alt="random fact" />
-			</a>
-		</span>
-		<span id="addtoany"> 
-			<span id="share-title">
-			Share this fact on 
-			</span>
-			<div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_target share-this">
-				<a class="a2a_button_twitter"></a>
-				<a class="a2a_button_facebook" onClick="facebookA2aClick();"></a>
-				<a class="a2a_button_google_plus"></a>
-				<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-			</div>
-<!-- 						<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script> -->
-		</span>
-		<br/>
-		<div id="fact-container">
-			<p>If</p>
-			{{> selections id="a1"}}
-			<p>were <span id="domain-descriptor"></span></p>
-			{{> selections id="b1"}}
-			<p>then</p>
-			{{> selections id="a2"}}
-			<p>would be</p>
-			<p>
-				<span id="multiplier"></span>&nbsp;times 
-			</p>
-			<p id="answer">
-				<a href="#" class="show-link" onClick="show();"><span id="b2"></span>.<img src="images/show_icon.png"/></a>
-			</p>
-		</div>
-		<div id="copy-fact-container" >
-			<button id="copy-fact" >Copy this fact to your clipboard</button>
-			<div id="copy-confirmation">Fact copied!</div>
+	<div id="subtitle">A Small Sense of Scale</div>
+	<div id="header" class="top-level">
+		<div id="title">Analogizer</div>
+<!-- 		<div id="intro"> -->
+<!-- 			Very large and very small numbers can be hard to grasp. Lucky for you, we are here to help you get a sense of -->
+<!-- 			proportion without the need to resort to all that scientific notation.  -->
+<!-- 		</div> -->
+		<div id="domains">
+			<div class="{{#if isSelectedDomain "size"}}selected{{/if}}" id="size-domain-button">Size</div> 
+			<div class="{{#if isSelectedDomain "distance"}}selected{{/if}}" id="distance-domain-button">Distance</div> 
+			<div class="{{#if isSelectedDomain "time"}}selected{{/if}}" id="time-domain-button">Time</div> 
 		</div>
 	</div>
+		<div id="main" class="top-level">
+			<span id="random-fact">
+				<img src="images/random-icon.svg" alt="random fact" />
+			</span>
+<!-- 			<span id="addtoany">  -->
+<!-- 				<span id="share-title"> -->
+<!-- 				Share this fact on  -->
+<!-- 				</span> -->
+<!-- 				<div class="a2a_kit a2a_kit_size_32 a2a_default_style a2a_target share-this"> -->
+<!-- 					<a class="a2a_button_twitter"></a> -->
+<!-- 					<a class="a2a_button_facebook" id="facebook-a2a-button"></a> -->
+<!-- 					<a class="a2a_button_google_plus"></a> -->
+<!-- 					<a class="a2a_dd" href="https://www.addtoany.com/share"></a> -->
+<!-- 				</div> -->
+	<!-- 						<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script> -->
+<!-- 			</span> -->
+			<br/>
+			<div id="fact-container">
+				<p id="fact-container-first-line">If</p>
+				{{> selections id="a1"}}
+				<p>were <span id="domain-descriptor"></span></p>
+				{{> selections id="b1"}}
+				<p>then</p>
+				{{> selections id="a2"}}
+				<p>would be</p>
+				<p>
+					<span id="multiplier">{{answer.multiplier}}</span>&nbsp;times 
+				</p>
+				<p id="answer">
+					<a href="#" class="show-link"><span id="b2">{{answer.text}}</span>.<img src="images/show_icon.png"/></a>
+				</p>
+			</div>
+			<div id="copy-fact-container" >
+				<button id="copy-fact" >Copy this fact to your clipboard</button>
+				<div id="copy-confirmation">Fact copied!</div>
+			</div>
+		</div>
+		<div id="detailsContainer">
+			<div id="left">
+				<div id="details" class="top-level">
+					<div id="details_title"></div>
+					<div id="details_measure"></div>
+					<div id="details_longDesc"></div>
+					<div id="details_source"></div>
+				</div>
+			</div>
+			<div id="details_image"></div>
+			<div id="byline">
+				Brought to you by <a href="mailto:mad7@runbox.com?subject=Analogizer feedback">Marc A. Donis</a>. Thanks for your feedback!
+			</div>
+		</div>
 </template>
 
 <template name="selections">

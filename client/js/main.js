@@ -1,11 +1,44 @@
 const selectedDomain = new ReactiveVar("size");
-
+const answer = new ReactiveVar({});
 
 Template.main.helpers({
+	isSelectedDomain : function(domain) {
+		return selectedDomain.get() == domain;
+	},
 
+	answer : function() {
+		return answer.get();
+	},
 });
 
 Template.main.events({
+	"click #random-fact" : function(e) {
+		const a1 = $("#a1 select")[0];
+		const a2 = $("#a2 select")[0];
+		const b1 = $("#b1 select")[0];
+		setSelectedIndex("a1", Math.floor(Math.random() * a1.options.length));
+		do {
+			setSelectedIndex("b1", Math.floor(Math.random() * b1.options.length));
+		} while (a1.options[a1.selectedIndex].value == b1.options[b1.selectedIndex].value);
+		do {
+			setSelectedIndex("a2", Math.floor(Math.random() * a2.options.length));
+		} while (a1.options[a1.selectedIndex].value == a2.options[a2.selectedIndex].value);
+
+		compute();
+		const selection = data[selectedDomain.get()][getSelectedIndex("a1")];
+		updateDetails(selection);
+	//		updateUrl();
+	},
+
+	"click #domains div" : function(e) {
+		const domain = e.target.id.replace("-domain-button", "");
+		selectedDomain.set(domain);
+	//		if (selectedDomain.get() != domain) {
+	//			selectedDomain.set(domain);
+	//			window.location.href = updateUrl(true);
+	//		}
+	},
+
 	"click .show-link" : function(e) {
 		show(e.target.parentElement.parentElement.id);
 	},
@@ -66,17 +99,6 @@ Template.main.events({
 
 
 Template.main.onRendered(function() {
-	//	a1 = document.getElementById("a1");
-	//	b1 = document.getElementById("b1");
-	//	a2 = document.getElementById("a2");
-	//	b2 = document.getElementById("b2");
-	//	multiplier = document.getElementById("multiplier");
-	//	detailsTitle = document.getElementById("details_title");
-	//	detailsMeasure = document.getElementById("details_measure");
-	//	detailsLongDesc = document.getElementById("details_longDesc");
-	//	const detailsSource = document.getElementById("details_source");
-	//	const detailsImage = document.getElementById("details_image");
-
 	const _selectedDomain = selectedDomain.get();
 	//	defaults
 	const a1Index = defaults[_selectedDomain].a1;
@@ -85,9 +107,9 @@ Template.main.onRendered(function() {
 	$("#" + _selectedDomain).addClass("selected");
 	$("#domain-descriptor").html(descriptors[_selectedDomain]);
 
-	$("#a1 select").prop("selectedIndex", a1Index);
-	$("#b1 select").prop("selectedIndex", b1Index);
-	$("#a2 select").prop("selectedIndex", a2Index);
+	setSelectedIndex("a1", a1Index);
+	setSelectedIndex("b1", b1Index);
+	setSelectedIndex("a2", a2Index);
 
 	show("a1");
 });
@@ -105,9 +127,12 @@ Template.selections.helpers({
 function compute() {
 	const b2Data = getB2Data();
 	const _selectedDomain = selectedDomain.get();
-	a1Selection = data[_selectedDomain][a1.options[a1.selectedIndex].value];
-	b1Selection = data[_selectedDomain][b1.options[b1.selectedIndex].value];
-	a2Selection = data[_selectedDomain][a2.options[a2.selectedIndex].value];
+	const a1 = $("#a1 select")[0];
+	const b1 = $("#b1 select")[0];
+	const a2 = $("#a2 select")[0];
+	const a1Selection = data[_selectedDomain][getSelectedIndex("a1")];
+	const b1Selection = data[_selectedDomain][getSelectedIndex("b1")];
+	const a2Selection = data[_selectedDomain][getSelectedIndex("a2")];
 	const result = a2Selection.measure * (b1Selection.measure / a1Selection.measure);
 
 	var i = 0;
@@ -122,14 +147,16 @@ function compute() {
 		}
 	}
 
-	b2.innerHTML = b2Data[i - 1].description;
-	b2.index = i - 1;
-	multiplier.innerHTML = formatNum(result / b2Data[i - 1].measure, 2);
-
-	a2a.init("Analogizer", {
-		target : ".share-this",
-		linkname : getFactText(),
+	answer.set({
+		text : b2Data[i - 1].description,
+		index : i - 1,
+		multiplier : formatNum(result / b2Data[i - 1].measure, 2),
 	});
+
+	//	a2a.init("Analogizer", {
+	//		target : ".share-this",
+	//		linkname : getFactText(),
+	//	});
 
 //	a2a_linkname = getFactText();
 //	a2a_linkurl = window.location.href;
@@ -153,13 +180,21 @@ function show(id) {
 	var i;
 	var _data = data[selectedDomain.get()];
 	if (id) {
-		i = $("#" + id + " select").prop("selectedIndex");
+		i = getSelectedIndex(id);
 	} else {
 		_data = getB2Data();
 		i = b2.index;
 	}
 	const selection = _data[i];
 	updateDetails(selection);
+}
+
+function getSelectedIndex(id) {
+	return $("#" + id + " select").prop("selectedIndex");
+}
+
+function setSelectedIndex(id, index) {
+	return $("#" + id + " select").prop("selectedIndex", index);
 }
 
 function update(e) {
@@ -172,29 +207,29 @@ function update(e) {
 	}
 	const selection = data[selectedDomain.get()][evt.target.options[evt.target.selectedIndex].value];
 	updateDetails(selection);
-	updateUrl();
+//	updateUrl();
 }
 
-function updateUrl(isDefaults) {
-	const url = document.URL;
-	if (url.indexOf("?") > 0) {
-		url = url.split("?")[0];
-	}
-
-	const a1Index = a1.selectedIndex;
-	const a2Index = a2.selectedIndex;
-	const b1Index = b1.selectedIndex;
-	const _selectedDomain = selectedDomain.get();
-	if (isDefaults) {
-		a1Index = defaults[_selectedDomain].a1;
-		a2Index = defaults[_selectedDomain].a2;
-		b1Index = defaults[_selectedDomain].b1;
-	}
-
-	url += "?a1=" + a1Index + "&b1=" + b1Index + "&a2=" + a2Index + "&domain=" + _selectedDomain;
-	window.history.pushState(null, null, url);
-	return url;
-}
+//function updateUrl(isDefaults) {
+//	const url = document.URL;
+//	if (url.indexOf("?") > 0) {
+//		url = url.split("?")[0];
+//	}
+//
+//	const a1Index = a1.selectedIndex;
+//	const a2Index = a2.selectedIndex;
+//	const b1Index = b1.selectedIndex;
+//	const _selectedDomain = selectedDomain.get();
+//	if (isDefaults) {
+//		a1Index = defaults[_selectedDomain].a1;
+//		a2Index = defaults[_selectedDomain].a2;
+//		b1Index = defaults[_selectedDomain].b1;
+//	}
+//
+//	url += "?a1=" + a1Index + "&b1=" + b1Index + "&a2=" + a2Index + "&domain=" + _selectedDomain;
+//	window.history.pushState(null, null, url);
+//	return url;
+//}
 
 function updateDetails(selection) {
 	$("#details_title").html(selection.description.substr(0, 1).toUpperCase() + selection.description.substr(1));
@@ -210,13 +245,6 @@ function formatNum(num, precision) {
 //	return numFromat.toFormatted();
 }
 
-function selectDomain(el) {
-	if (selectedDomain.get() != el.id) {
-		selectedDomain.set(el.id);
-		window.location.href = updateUrl(true);
-	}
-}
-
 function getB2Data() {
 	const _selectedDomain = selectedDomain.get();
 	const b2Data = [];
@@ -226,19 +254,4 @@ function getB2Data() {
 	//		}
 	}
 	return b2Data;
-}
-
-function randomFact() {
-	a1.selectedIndex = Math.floor(Math.random() * a1.options.length);
-	do {
-		b1.selectedIndex = Math.floor(Math.random() * b1.options.length);
-	} while (a1.options[a1.selectedIndex].value == b1.options[b1.selectedIndex].value);
-	do {
-		a2.selectedIndex = Math.floor(Math.random() * a2.options.length);
-	} while (a1.options[a1.selectedIndex].value == a2.options[a2.selectedIndex].value);
-
-	compute();
-	const selection = data[selectedDomain.get()][a1.options[a1.selectedIndex].value];
-	updateDetails(selection);
-	updateUrl();
 }
