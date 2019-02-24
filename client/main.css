@@ -148,13 +148,13 @@ body {
 	font-size: 1.8em;
 }
 
-#main p {
-	line-height: 12px;
-}
-
 #fact-container-first-line {
 	position: relative;
 	left: -42px;
+}
+
+#fact-container-last-line {
+	line-height: 1.8em;
 }
 
 #copy-fact-container {
