@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 meteor build --verbose ~/analogizer-build --server=http://localhot:3000
 
 cd ~/analogizer-build/android/project/build/outputs/apk/release
