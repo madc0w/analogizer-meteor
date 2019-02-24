@@ -6,7 +6,7 @@ defaults = {
 	},
 	distance : {
 		a1 : 4,
-		b1 : 2,
+		b1 : 11,
 		a2 : 9,
 	},
 	time : {
@@ -368,7 +368,7 @@ data = {
 
 	distance : [
 		{
-			description : "the distance to edge of Observable Universe",
+			description : "distance to edge of universe",
 			measure : 4.3e+26,
 			alternateUnit : "billion light-years",
 			source : "http://en.wikipedia.org/wiki/Observable_universe",
@@ -377,7 +377,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to Virgo Supercluster",
+			description : "distance to Virgo Supercluster",
 			measure : 6.1495e+23,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Virgo_Supercluster",
@@ -386,7 +386,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to Andromeda Galaxy",
+			description : "distance to Andromeda Galaxy",
 			measure : 2.4011e+22,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Andromeda_Galaxy",
@@ -395,7 +395,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to Canis Major Dwarf Galaxy",
+			description : "distance to Canis Major Galaxy",
 			measure : 2.3652e+20,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Canis_Major_Overdensity",
@@ -404,7 +404,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to center of the Milky Way",
+			description : "distance to center of Milky Way",
 			measure : 2.47e+20,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Galactic_Center",
@@ -413,7 +413,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to Orion Nebula",
+			description : "distance to the Orion Nebula",
 			measure : 1.2715e+19,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Orion_Nebula",
@@ -422,7 +422,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "the distance to Alpha Centauri system",
+			description : "distance to Alpha Centauri",
 			measure : 4.1315e+16,
 			alternateUnit : "light-years",
 			source : "http://en.wikipedia.org/wiki/Alpha_Centauri",
@@ -467,7 +467,7 @@ data = {
 			include : [ "a1", "a2", "b1", "b2" ]
 		},
 		{
-			description : "the distance from New York to Sydney",
+			description : "NYC to Sydney",
 			measure : 16000e+3,
 			alternateUnit : "kilometers",
 			source : null,
@@ -476,7 +476,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the distance from New York City to Chicago",
+			description : "NYC to Chicago",
 			measure : 1250e+3,
 			alternateUnit : "kilometers",
 			source : null,
@@ -485,7 +485,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the length of Manhattan Island",
+			description : "length of Manhattan",
 			measure : 21.6e+3,
 			alternateUnit : "kilometers",
 			source : "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Manhattan&sll=31.090574,-96.240234&sspn=29.221517,52.426758&g=texas&ie=UTF8&hq=&hnear=Manhattan,+New+York&ll=40.78782,-73.907089&spn=0.406548,0.819168&t=k&z=11&iwloc=A",
@@ -494,7 +494,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the height of Eiffel Tower",
+			description : "height of the Eiffel Tower",
 			measure : 301,
 			alternateUnit : "meters",
 			source : "http://en.wikipedia.org/wiki/Eiffel_Tower",
@@ -503,7 +503,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the width of an average living room",
+			description : "width of your living room",
 			measure : 8,
 			alternateUnit : "meters",
 			source : null,
@@ -521,7 +521,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the length of a human hand",
+			description : "length of a human hand",
 			measure : 16e-2,
 			alternateUnit : "centimeters",
 			source : null,
@@ -530,7 +530,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the width of a pinky finger",
+			description : "width of a pinky finger",
 			measure : 1e-2,
 			alternateUnit : "centimeters",
 			source : null,
@@ -539,7 +539,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the width of the head of a pin",
+			description : "width of the head of a pin",
 			measure : 2e-3,
 			alternateUnit : "microns",
 			source : null,
@@ -548,7 +548,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "the width of a human hair",
+			description : "width of a human hair",
 			measure : 1e-4,
 			alternateUnit : "microns",
 			source : "http://en.wikipedia.org/wiki/Orders_of_magnitude_(length)",
@@ -588,7 +588,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "since multi-cellular life appeared on land",
+			description : "since multi-cellular land life",
 			measure : 1.3970448e+16,
 			alternateUnit : "million years",
 			source : "https://en.wikipedia.org/wiki/Silurian",
@@ -597,7 +597,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "since the dinosaurs first appeared",
+			description : "since dinosaurs first appeared",
 			measure : 8.577792e+15,
 			alternateUnit : "million years",
 			source : "https://en.wikipedia.org/wiki/Dinosaur#Origins_and_early_evolution",
@@ -615,7 +615,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "since our genus Homo first appeared",
+			description : "since genus Homo appeared",
 			measure : 8.83008e+13,
 			alternateUnit : "million years",
 			source : "https://en.wikipedia.org/wiki/Human_evolution#Evolution_of_genus_Homo",
@@ -624,7 +624,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "since modern humans first appeared",
+			description : "since modern humans appeared",
 			measure : 8.83008e+13,
 			alternateUnit : "thousand years",
 			source : "https://en.wikipedia.org/wiki/Homo_sapiens",
@@ -633,7 +633,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "history of human civilization",
+			description : "history of civilization",
 			measure : 4.41504e+11,
 			alternateUnit : "thousand years",
 			source : "https://en.wikipedia.org/wiki/Cradle_of_civilization#Rise_of_civilization",
@@ -651,7 +651,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "time since Industrial Revolution",
+			description : "since Industrial Revolution",
 			measure : 7.884e+9,
 			alternateUnit : "years",
 			source : "https://en.wikipedia.org/wiki/Industrial_Revolution",
@@ -660,7 +660,7 @@ data = {
 			include : [ "a1", "a2" ]
 		},
 		{
-			description : "a typical human lifespan",
+			description : "typical human lifespan",
 			measure : 2.523e+9,
 			alternateUnit : "years",
 			source : "https://en.wikipedia.org/wiki/Maximum_life_span",
@@ -669,7 +669,7 @@ data = {
 			include : [ "a1", "a2", "b1", "b2" ]
 		},
 		{
-			description : "one year on Earth",
+			description : "one year",
 			measure : 3.154e+7,
 			alternateUnit : "years",
 			source : "https://en.wikipedia.org/wiki/Year",
@@ -678,7 +678,7 @@ data = {
 			include : [ "b1", "b2" ]
 		},
 		{
-			description : "one day on Earth",
+			description : "one day",
 			measure : 86400,
 			alternateUnit : "days",
 			source : "https://en.wikipedia.org/wiki/Day",

@@ -33,23 +33,23 @@ Template.main.events({
 		compute();
 		const selection = data[selectedDomain.get()][getSelectedIndex("a1")];
 		updateDetails(selection);
-	//		updateUrl();
+		//		updateUrl();
 	},
 
 	"click #domains div" : function(e) {
 		const domain = e.target.id.replace("-domain-button", "");
 		selectedDomain.set(domain);
-		
+
 		setSelectedIndex("a1", defaults[domain].a1);
 		setSelectedIndex("b1", defaults[domain].b1);
 		setSelectedIndex("a2", defaults[domain].a2);
 
 		compute();
 		show("a1");
-	//		if (selectedDomain.get() != domain) {
-	//			selectedDomain.set(domain);
-	//			window.location.href = updateUrl(true);
-	//		}
+		//		if (selectedDomain.get() != domain) {
+		//			selectedDomain.set(domain);
+		//			window.location.href = updateUrl(true);
+		//		}
 	},
 
 	"click .show-link" : function(e) {
@@ -110,7 +110,6 @@ Template.main.events({
 	},
 });
 
-
 Template.main.onRendered(function() {
 	const _selectedDomain = selectedDomain.get();
 	//	defaults
@@ -148,7 +147,8 @@ function compute() {
 	const result = a2Selection.measure * (b1Selection.measure / a1Selection.measure);
 
 	var i = 0;
-	while (b2Data[i++].measure > result && i < b2Data.length);
+	while (b2Data[i++].measure > result && i < b2Data.length)
+		;
 
 	if (i > 1) {
 		// find the closest match, larger or smaller
@@ -159,10 +159,20 @@ function compute() {
 		}
 	}
 
+	var multiplier = result / b2Data[i - 1].measure;
+	if (multiplier > 0.8 && multiplier < 1.2) {
+		multiplier = "about";
+	} else if (multiplier > 0.4 && multiplier < 0.6) {
+		multiplier = "about half";
+	} else if (multiplier > 1.8 && multiplier < 2.2) {
+		multiplier = "about twice";
+	} else {
+		multiplier = "about " + formatNum(multiplier, 1) + " times";
+	}
 	answer.set({
 		text : b2Data[i - 1].description,
 		index : i - 1,
-		multiplier : formatNum(result / b2Data[i - 1].measure, 2),
+		multiplier : multiplier,
 	});
 
 	//	a2a.init("Analogizer", {
@@ -170,10 +180,10 @@ function compute() {
 	//		linkname : getFactText(),
 	//	});
 
-//	a2a_linkname = getFactText();
-//	a2a_linkurl = window.location.href;
-//	var fbDesc = document.getElementById("facebook-description");
-//	fbDesc.setAttribute("content", "kakaka");
+	//	a2a_linkname = getFactText();
+	//	a2a_linkurl = window.location.href;
+	//	var fbDesc = document.getElementById("facebook-description");
+	//	fbDesc.setAttribute("content", "kakaka");
 }
 
 function getFactText() {
@@ -182,8 +192,8 @@ function getFactText() {
 	const a1Selection = data[_selectedDomain][getSelectedIndex("a1")];
 	const a2Selection = data[_selectedDomain][getSelectedIndex("a2")];
 	const b1Selection = data[_selectedDomain][getSelectedIndex("b1")];
-	const text = "If " + a1Selection.description + " were " + descriptor + b1Selection.description + ", then " + a2Selection.description + " would be "
-		+ answer.get().multiplier + " times " + descriptor + answer.get().text + ".";
+	const text = "If " + a1Selection.description + " were " + descriptor + b1Selection.description + ", then " + a2Selection.description
+		+ " would be " + answer.get().multiplier + descriptor + answer.get().text + ".";
 	return text;
 }
 
@@ -222,7 +232,7 @@ function update(e) {
 	}
 	const selection = data[selectedDomain.get()][evt.target.selectedIndex];
 	updateDetails(selection);
-//	updateUrl();
+	//	updateUrl();
 }
 
 function getUrl() {
@@ -238,7 +248,8 @@ function getUrl() {
 
 function updateDetails(selection) {
 	$("#details-title").html(selection.description.substr(0, 1).toUpperCase() + selection.description.substr(1));
-	$("#details-measure").html(formatNum(selection.measure / conversions[selectedDomain.get()][selection.alternateUnit], 3) + " " + selection.alternateUnit);
+	$("#details-measure").html(
+		formatNum(selection.measure / conversions[selectedDomain.get()][selection.alternateUnit], 3) + " " + selection.alternateUnit);
 	$("#details-long-desc").html(selection.longDesc);
 	$("#details-image").html(selection.imageUrl ? '<a href="' + selection.imageUrl + '"><img src="' + selection.imageUrl + '"/></a>' : "");
 	$("#details-source").html(selection.source ? '<a href="' + selection.source + '">Source</a>' : "");
@@ -253,10 +264,10 @@ function formatNum(num, precision) {
 function getB2Data() {
 	const _selectedDomain = selectedDomain.get();
 	const b2Data = [];
-	for (var i in data[_selectedDomain]) {
+	for ( var i in data[_selectedDomain]) {
 		//		if (data[selectedDomain][i].include.includes("b2")) {
 		b2Data.push(data[_selectedDomain][i]);
-	//		}
+		//		}
 	}
 	return b2Data;
 }

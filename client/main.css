@@ -1,10 +1,10 @@
 body {
-	font-family: arial;
 	background-color: #f0f0ff;
 	font-family: Lato;
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	zoom: 0.45;
 }
 
 #main-container {
@@ -13,7 +13,7 @@ body {
 }
 
 #content {
-	
+	overflow: auto;
 }
 
 #footer {
@@ -39,7 +39,7 @@ body {
 	font-weight: bold;
 	font-size: 1.2em;
 	left: 6%;
-	top: 8px;
+	top: 18px;
 	position: absolute;
 }
 
@@ -47,6 +47,7 @@ body {
 	text-align: center;
 	height: 64px;
 	padding-top: 16px;
+	padding-bottom: 12px;
 }
 
 #domains div {
@@ -104,13 +105,14 @@ body {
 	margin-right: auto;
 	padding: 20px;
 	text-align: center;
-	width: 75%;
+	width: 85%;
 }
 
 #details-container {
 	width: 100%;
-	display: inline-block;
 	margin-top: 32px;
+	padding-bottom: 300px;
+	margin-bottom: 300px;
 }
 
 #details {
