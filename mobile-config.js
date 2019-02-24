@@ -1,3 +1,7 @@
+const version = "1.0.1";
+const buildNumber = Math.floor(+new Date() / (24 * 60 * 60));
+console.log("*** setting buildNumber ", buildNumber);
+
 App.icons({
 	// Android
 	android_mdpi : "resources/icons/mipmap-mdpi/ic_launcher.png",
@@ -20,4 +24,15 @@ App.launchScreens({
 	android_xxhdpi_landscape : "resources/splash/drawable-xxhdpi/background.9.png",
 	android_xxxhdpi_portrait : "resources/splash/drawable-xxxhdpi/background.9.png",
 	android_xxxhdpi_landscape : "resources/splash/drawable-xxxhdpi/background.9.png",
+});
+
+
+App.info({
+	id : "com.analogizer",
+	name : "Analogizer",
+	author : "Marc A. Donis",
+	email : "mad7@runbox.com",
+	website : "http://heliosophiclabs.com/analogizer",
+	version : version,
+	buildNumber : buildNumber
 });
