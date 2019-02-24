@@ -28,7 +28,7 @@ App.launchScreens({
 
 
 App.info({
-	id : "com.analogizer",
+	id : "com.idlhs22anb0yam.nurrkag7nxje",
 	name : "Analogizer",
 	author : "Marc A. Donis",
 	email : "mad7@runbox.com",
