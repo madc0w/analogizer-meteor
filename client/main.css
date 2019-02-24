@@ -2,6 +2,29 @@ body {
 	font-family: arial;
 	background-color: #f0f0ff;
 	font-family: Lato;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#main-container {
+	min-height: 100%;
+	position: relative;
+}
+
+#content {
+	
+}
+
+#footer {
+	position: fixed;
+	background: white;
+	margin: 8px;
+	padding: 8px;
+	width: 100%;
+	bottom: 0;
+	font-size: 1.4em;
+	width: 100%;
 }
 
 #title {
@@ -15,14 +38,15 @@ body {
 	color: black;
 	font-weight: bold;
 	font-size: 1.2em;
-	left: 20px;
+	left: 6%;
+	top: 8px;
 	position: absolute;
 }
 
 #domains {
 	text-align: center;
 	height: 64px;
-	padding-top: 8px;
+	padding-top: 16px;
 }
 
 #domains div {
@@ -45,24 +69,24 @@ body {
 }
 
 #domains div.selected {
-/* 	color: black; */
-/* 	border-color: black; */
-	background-color: yellow;
+	color: white;
+	border-color: white;
+	background-color: #1a1241;
 }
 
 #header {
+	width: 90%;
 	background-color: #A1C7FF;
 	border: 2px solid;
 	border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 12px;
 }
 
 #main select {
 	font-size: 36px;
 	background-color: #eee;
-}
-
-div {
-	margin: 10px;
 }
 
 #b2 {
@@ -83,30 +107,42 @@ div {
 	width: 75%;
 }
 
-#left {
-	margin: 0px;
+#details-container {
+	width: 100%;
+	display: inline-block;
+	margin-top: 32px;
 }
 
 #details {
+	position: absolute;
+	display: inline-block;
 	border-radius: 4px;
 	padding: 10px;
 	border: 2px solid;
 	background-color: #A1C7FF;
-	width: 500px;
+	border-radius: 4px;
+	padding: 10px;
+	border: 2px solid;
+	background-color: #A1C7FF;
+	width: 34%;
+	left: 52%;
+	font-size: 1.4em;
 }
 
-#byline {
-	font-size: 1em;
+#details-image {
+	position: absolute;
+	left: 10%;
+	display: inline-block;
+	width: 40%;
 }
 
-#details_image img {
+#details-image img {
 	border-radius: 20px;
-	width: 400px;
-	margin-top: 20px;
+	width: 100%;
 }
 
-#details_title {
-	font-size: 22px;
+#details-title {
+	font-size: 1.8em;
 }
 
 #main p {
@@ -160,7 +196,8 @@ div {
 }
 
 .a2a_kit {
-/* 	display: inline; */
+	/* 	display: inline; */
+	
 }
 
 #share-title {

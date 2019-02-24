@@ -21,7 +21,14 @@
 	
 </head>
 <body>
-	{{> main}}
+	<div id="main-container">
+		<div id="content">
+			{{> main}}
+		</div>
+		<div id="footer">
+			Brought to you by <a href="mailto:mad7@runbox.com?subject=Analogizer feedback">Marc A. Donis</a>. Thanks for your feedback!
+		</div>
+	</div>
 </body>
 
 
@@ -39,10 +46,10 @@
 			<div class="{{#if isSelectedDomain "time"}}selected{{/if}}" id="time-domain-button">Time</div> 
 		</div>
 	</div>
-		<div id="main" class="top-level">
-			<span id="random-fact">
-				<img src="images/random-icon.svg" alt="random fact" />
-			</span>
+	<div id="main" class="top-level">
+		<span id="random-fact">
+			<img src="images/random-icon.svg" alt="random fact" />
+		</span>
 <!-- 			<span id="addtoany">  -->
 <!-- 				<span id="share-title"> -->
 <!-- 				Share this fact on  -->
@@ -53,43 +60,38 @@
 <!-- 					<a class="a2a_button_google_plus"></a> -->
 <!-- 					<a class="a2a_dd" href="https://www.addtoany.com/share"></a> -->
 <!-- 				</div> -->
-	<!-- 						<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script> -->
+<!-- 						<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script> -->
 <!-- 			</span> -->
-			<br/>
-			<div id="fact-container">
-				<p id="fact-container-first-line">If</p>
-				{{> selections id="a1"}}
-				<p>were <span id="domain-descriptor"></span></p>
-				{{> selections id="b1"}}
-				<p>then</p>
-				{{> selections id="a2"}}
-				<p>would be</p>
-				<p>
-					<span id="multiplier">{{answer.multiplier}}</span>&nbsp;times 
-				</p>
-				<p id="answer">
-					<a href="#" class="show-link"><span id="b2">{{answer.text}}</span>.<img src="images/show_icon.png"/></a>
-				</p>
-			</div>
-			<div id="copy-fact-container" >
-				<button id="copy-fact" >Copy this fact to your clipboard</button>
-				<div id="copy-confirmation">Fact copied!</div>
-			</div>
+		<br/>
+		<div id="fact-container">
+			<p id="fact-container-first-line">If</p>
+			{{> selections id="a1"}}
+			<p>were <span id="domain-descriptor">{{domainDescriptor}}</span></p>
+			{{> selections id="b1"}}
+			<p>then</p>
+			{{> selections id="a2"}}
+			<p>would be</p>
+			<p>
+				<span id="multiplier">{{answer.multiplier}}</span>&nbsp;times 
+			</p>
+			<p id="answer">
+				<a href="#" class="show-link"><span id="b2">{{answer.text}}</span>.<img src="images/show_icon.png"/></a>
+			</p>
 		</div>
-		<div id="detailsContainer">
-			<div id="left">
-				<div id="details" class="top-level">
-					<div id="details_title"></div>
-					<div id="details_measure"></div>
-					<div id="details_longDesc"></div>
-					<div id="details_source"></div>
-				</div>
-			</div>
-			<div id="details_image"></div>
-			<div id="byline">
-				Brought to you by <a href="mailto:mad7@runbox.com?subject=Analogizer feedback">Marc A. Donis</a>. Thanks for your feedback!
-			</div>
+		<div id="copy-fact-container" >
+			<button id="copy-fact" >Copy this fact to your clipboard</button>
+			<div id="copy-confirmation">Fact copied!</div>
 		</div>
+	</div>
+	<div id="details-container">
+		<div id="details-image"></div>
+		<div id="details" class="top-level">
+			<div id="details-title"></div>
+			<div id="details-measure"></div>
+			<div id="details-long-desc"></div>
+			<div id="details-source"></div>
+		</div>
+	</div>
 </template>
 
 <template name="selections">
