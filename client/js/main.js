@@ -16,7 +16,15 @@ Template.main.helpers({
 });
 
 Template.main.events({
-	"change select" : update,
+	"change select" : function(e) {
+		compute();
+		const _selectedDomain = selectedDomain.get();
+		const selection = data[_selectedDomain][e.target.selectedIndex];
+		const _defaults = getDefaults();
+		_defaults[_selectedDomain][e.target.parentElement.id] = e.target.selectedIndex;
+		localStorage.setItem("defaults", JSON.stringify(_defaults));
+		updateDetails(selection);
+	},
 
 	"click #random-fact" : function(e) {
 		const a1 = $("#a1 select")[0];
@@ -33,23 +41,26 @@ Template.main.events({
 		compute();
 		const selection = data[selectedDomain.get()][getSelectedIndex("a1")];
 		updateDetails(selection);
-		//		updateUrl();
+	//		updateUrl();
 	},
 
 	"click #domains div" : function(e) {
 		const domain = e.target.id.replace("-domain-button", "");
 		selectedDomain.set(domain);
 
-		setSelectedIndex("a1", defaults[domain].a1);
-		setSelectedIndex("b1", defaults[domain].b1);
-		setSelectedIndex("a2", defaults[domain].a2);
+		Meteor.setTimeout(() => {
+			const _defaults = getDefaults();
+			setSelectedIndex("a1", _defaults[domain].a1);
+			setSelectedIndex("b1", _defaults[domain].b1);
+			setSelectedIndex("a2", _defaults[domain].a2);
 
-		compute();
-		show("a1");
-		//		if (selectedDomain.get() != domain) {
-		//			selectedDomain.set(domain);
-		//			window.location.href = updateUrl(true);
-		//		}
+			compute();
+			show("a1");
+		}, 0);
+	//		if (selectedDomain.get() != domain) {
+	//			selectedDomain.set(domain);
+	//			window.location.href = updateUrl(true);
+	//		}
 	},
 
 	"click .show-link" : function(e) {
@@ -113,13 +124,10 @@ Template.main.events({
 Template.main.onRendered(function() {
 	const _selectedDomain = selectedDomain.get();
 	//	defaults
-	const a1Index = defaults[_selectedDomain].a1;
-	const a2Index = defaults[_selectedDomain].a2;
-	const b1Index = defaults[_selectedDomain].b1;
-
-	setSelectedIndex("a1", a1Index);
-	setSelectedIndex("b1", b1Index);
-	setSelectedIndex("a2", a2Index);
+	const _defaults = getDefaults()
+	setSelectedIndex("a1", _defaults[_selectedDomain].a1);
+	setSelectedIndex("b1", _defaults[_selectedDomain].b1);
+	setSelectedIndex("a2", _defaults[_selectedDomain].a2);
 
 	show("a1");
 	compute();
@@ -147,8 +155,7 @@ function compute() {
 	const result = a2Selection.measure * (b1Selection.measure / a1Selection.measure);
 
 	var i = 0;
-	while (b2Data[i++].measure > result && i < b2Data.length)
-		;
+	while (b2Data[i++].measure > result && i < b2Data.length);
 
 	if (i > 1) {
 		// find the closest match, larger or smaller
@@ -180,10 +187,10 @@ function compute() {
 	//		linkname : getFactText(),
 	//	});
 
-	//	a2a_linkname = getFactText();
-	//	a2a_linkurl = window.location.href;
-	//	var fbDesc = document.getElementById("facebook-description");
-	//	fbDesc.setAttribute("content", "kakaka");
+//	a2a_linkname = getFactText();
+//	a2a_linkurl = window.location.href;
+//	var fbDesc = document.getElementById("facebook-description");
+//	fbDesc.setAttribute("content", "kakaka");
 }
 
 function getFactText() {
@@ -222,19 +229,6 @@ function setSelectedIndex(id, index) {
 	return $("#" + id + " select").prop("selectedIndex", index);
 }
 
-function update(e) {
-	compute();
-	// evt evaluates to window.event or inexplicit e object, depending on which one is defined
-	const evt = window.event || e;
-	if (!evt.target) {
-		// if event obj doesn't support e.target, presume it does e.srcElement
-		evt.target = evt.srcElement; // extend obj with custom e.target prop
-	}
-	const selection = data[selectedDomain.get()][evt.target.selectedIndex];
-	updateDetails(selection);
-	//	updateUrl();
-}
-
 function getUrl() {
 	var url = "http://heliosophiclabs.com/analogizer/";
 	const a1Index = getSelectedIndex("a1");
@@ -249,7 +243,7 @@ function getUrl() {
 function updateDetails(selection) {
 	$("#details-title").html(selection.description.substr(0, 1).toUpperCase() + selection.description.substr(1));
 	$("#details-measure").html(
-		formatNum(selection.measure / conversions[selectedDomain.get()][selection.alternateUnit], 3) + " " + selection.alternateUnit);
+		formatNum(selection.measure / conversions[selectedDomain.get()][selection.alternateUnit], 2) + " " + selection.alternateUnit);
 	$("#details-long-desc").html(selection.longDesc);
 	$("#details-image").html(selection.imageUrl ? '<a href="' + selection.imageUrl + '"><img src="' + selection.imageUrl + '"/></a>' : "");
 	$("#details-source").html(selection.source ? '<a href="' + selection.source + '">Source</a>' : "");
@@ -264,10 +258,20 @@ function formatNum(num, precision) {
 function getB2Data() {
 	const _selectedDomain = selectedDomain.get();
 	const b2Data = [];
-	for ( var i in data[_selectedDomain]) {
+	for (var i in data[_selectedDomain]) {
 		//		if (data[selectedDomain][i].include.includes("b2")) {
 		b2Data.push(data[_selectedDomain][i]);
-		//		}
+	//		}
 	}
 	return b2Data;
+}
+
+function getDefaults() {
+	var _defaults = localStorage.getItem("defaults");
+	if (_defaults) {
+		_defaults = JSON.parse(_defaults);
+	} else {
+		_defaults = defaults;
+	}
+	return _defaults;
 }
